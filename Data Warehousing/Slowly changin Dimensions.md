@@ -6,6 +6,6 @@
 
 There are three main types of Slowly Changing Dimensions:
 
-    * Type 1: Overwrite
+*   Type 1: Overwrite
 *   Type 2: Add New Row
 *   Type 3: Add New Attribute
