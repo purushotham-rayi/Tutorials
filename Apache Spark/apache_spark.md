@@ -14,3 +14,6 @@
 ### Spark architecture
 
 1. What is an executor and what does it do?
+2. Explain various components of the spark architecture?
+3. What are deoployment modes in spark. Explain Cluster mode and Client mode and Local mode?
+    - What are the disadvantages of client mode deployment?
