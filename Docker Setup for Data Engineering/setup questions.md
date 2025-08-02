@@ -1,9 +1,9 @@
 # Setup Questions
 
-1. Can I bind two host volumes to a single docker container?
-- No, you cannot. You can only mount one bind volume.
+1. Can I bind two host volumes to a single docker container in MongoDB?
+    - No, you cannot. You can only mount one bind volume.
 2. How to save data of two separate apps in a single mongodb image MongoDB image?
-- Just save it to two different databases. MongoDB allows all the data to be saved to /data/db folder only. If you need complete isolation between the two projects, create two separate containers for each.
+    - Just save it to two different databases. MongoDB allows all the data to be saved to /data/db folder only. If you need complete isolation between the two projects, create two separate containers for each.
 3. What about Spark. Can we save output files of two projects in two separate folders?
     ### Two separate Docker compose files
     - Create two separate containers using docker compose.
@@ -18,3 +18,23 @@
     - You can mount both the folders to the same cluster.
     - Spark automatically shares resources between the two applications. Writing to the required destination can be configured using the spark code.
     - Use this when you create the multi-device setup. Will be useful for resource sharing.
+
+4. Now how to connect mongodb and spark?
+    - Mongodb and Spark containers are connected using networking.
+    - Before starting the container create an external network using the following command.
+        ``` docker network create spark-mongo-cluster```
+    - *spark-mongo-cluster* is the network name here.
+    - Update both the spark and mongodb compose files to connect to the external network
+        ```
+            services:
+                mongodb:
+                    image: image-name
+                    container-name: give-the-container-name
+                    ............
+                    ............
+                    networks:
+                        - spark-mongo-cluster
+            networks:
+                spark-mongo-cluster:
+                    external: true
+        ```
